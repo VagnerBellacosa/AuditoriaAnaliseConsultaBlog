@@ -1,0 +1,659 @@
+/* =============================================================================
+   Bellacosa Mainframe Library
+   modal.css
+   Modal Viewer
+=============================================================================*/
+
+/* =============================================================================
+   OVERLAY
+=============================================================================*/
+
+.modal{
+
+    position:fixed;
+
+    inset:0;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    background:rgba(0,0,0,.82);
+
+    backdrop-filter:blur(10px);
+
+    opacity:0;
+
+    visibility:hidden;
+
+    transition:
+        opacity .35s,
+        visibility .35s;
+
+    z-index:999999;
+
+}
+
+.modal.show{
+
+    opacity:1;
+
+    visibility:visible;
+
+}
+
+/* =============================================================================
+   CONTENT
+=============================================================================*/
+
+.modal-content{
+
+    display:flex;
+
+    flex-direction:column;
+
+    width:min(1600px,96vw);
+
+    height:min(94vh,1200px);
+
+    background:var(--color-surface);
+
+    border-radius:22px;
+
+    border:1px solid var(--color-border);
+
+    overflow:hidden;
+
+    box-shadow:var(--shadow-lg);
+
+    transform:translateY(40px) scale(.96);
+
+    transition:transform .35s;
+
+}
+
+.modal.show .modal-content{
+
+    transform:none;
+
+}
+
+/* =============================================================================
+   HEADER
+=============================================================================*/
+
+.modal-header{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    padding:18px 24px;
+
+    border-bottom:1px solid var(--color-border);
+
+    background:var(--color-surface-light);
+
+}
+
+.modal-title{
+
+    flex:1;
+
+    font-size:1.25rem;
+
+    font-weight:700;
+
+    overflow:hidden;
+
+    white-space:nowrap;
+
+    text-overflow:ellipsis;
+
+}
+
+/* =============================================================================
+   TOOLBAR
+=============================================================================*/
+
+.modal-toolbar{
+
+    display:flex;
+
+    gap:10px;
+
+}
+
+.modal-toolbar button{
+
+    width:42px;
+
+    height:42px;
+
+    border:none;
+
+    border-radius:12px;
+
+    background:var(--color-background);
+
+    color:var(--color-text);
+
+    cursor:pointer;
+
+    transition:.25s;
+
+}
+
+.modal-toolbar button:hover{
+
+    background:var(--color-primary);
+
+    color:#fff;
+
+}
+
+/* =============================================================================
+   CLOSE
+=============================================================================*/
+
+.modal-close{
+
+    width:48px;
+
+    height:48px;
+
+    border:none;
+
+    border-radius:50%;
+
+    background:transparent;
+
+    color:var(--color-text);
+
+    font-size:1.8rem;
+
+    cursor:pointer;
+
+    transition:.25s;
+
+}
+
+.modal-close:hover{
+
+    background:var(--color-danger);
+
+    color:white;
+
+    transform:rotate(90deg);
+
+}
+
+/* =============================================================================
+   BODY
+=============================================================================*/
+
+.modal-body{
+
+    flex:1;
+
+    display:flex;
+
+    overflow:hidden;
+
+}
+
+/* =============================================================================
+   IFRAME
+=============================================================================*/
+
+.modal-viewer{
+
+    flex:1;
+
+    position:relative;
+
+    background:#fff;
+
+}
+
+.modal-viewer iframe{
+
+    width:100%;
+
+    height:100%;
+
+    border:none;
+
+}
+
+/* =============================================================================
+   LOADING
+=============================================================================*/
+
+.modal-loading{
+
+    position:absolute;
+
+    inset:0;
+
+    display:flex;
+
+    flex-direction:column;
+
+    justify-content:center;
+
+    align-items:center;
+
+    gap:20px;
+
+    background:rgba(13,17,23,.92);
+
+    z-index:20;
+
+}
+
+.modal-loading.hidden{
+
+    display:none;
+
+}
+
+.modal-spinner{
+
+    width:60px;
+
+    height:60px;
+
+    border:5px solid rgba(255,255,255,.10);
+
+    border-top:5px solid var(--color-primary);
+
+    border-radius:50%;
+
+    animation:modalSpin 1s linear infinite;
+
+}
+
+@keyframes modalSpin{
+
+    to{
+
+        transform:rotate(360deg);
+
+    }
+
+}
+
+/* =============================================================================
+   SIDEBAR
+=============================================================================*/
+
+.modal-sidebar{
+
+    width:340px;
+
+    border-left:1px solid var(--color-border);
+
+    background:var(--color-surface);
+
+    display:flex;
+
+    flex-direction:column;
+
+}
+
+/* =============================================================================
+   RELATED
+=============================================================================*/
+
+.related-header{
+
+    padding:20px;
+
+    border-bottom:1px solid var(--color-border);
+
+}
+
+.related-header h3{
+
+    font-size:1.1rem;
+
+}
+
+.related-list{
+
+    flex:1;
+
+    overflow:auto;
+
+    padding:18px;
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:18px;
+
+}
+
+/* =============================================================================
+   RELATED CARD
+=============================================================================*/
+
+.related-card{
+
+    display:flex;
+
+    gap:12px;
+
+    cursor:pointer;
+
+    transition:.25s;
+
+}
+
+.related-card:hover{
+
+    transform:translateX(4px);
+
+}
+
+.related-card img{
+
+    width:96px;
+
+    height:70px;
+
+    object-fit:cover;
+
+    border-radius:10px;
+
+}
+
+.related-card h4{
+
+    font-size:.90rem;
+
+    line-height:1.4;
+
+    margin-bottom:6px;
+
+}
+
+.related-card small{
+
+    color:var(--color-muted);
+
+}
+
+/* =============================================================================
+   FOOTER
+=============================================================================*/
+
+.modal-footer{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    padding:16px 24px;
+
+    border-top:1px solid var(--color-border);
+
+    background:var(--color-surface-light);
+
+}
+
+.modal-navigation{
+
+    display:flex;
+
+    gap:12px;
+
+}
+
+.modal-navigation button{
+
+    padding:12px 20px;
+
+    border:none;
+
+    border-radius:12px;
+
+    background:var(--color-primary);
+
+    color:white;
+
+    font-weight:700;
+
+    cursor:pointer;
+
+    transition:.25s;
+
+}
+
+.modal-navigation button:hover{
+
+    background:var(--color-primary-dark);
+
+}
+
+/* =============================================================================
+   SHARE
+=============================================================================*/
+
+.modal-share{
+
+    display:flex;
+
+    gap:10px;
+
+}
+
+.modal-share button{
+
+    width:42px;
+
+    height:42px;
+
+    border:none;
+
+    border-radius:50%;
+
+    background:var(--color-background);
+
+    color:var(--color-text);
+
+    transition:.25s;
+
+}
+
+.modal-share button:hover{
+
+    background:var(--color-primary);
+
+    color:white;
+
+}
+
+/* =============================================================================
+   FAVORITE
+=============================================================================*/
+
+.modal-favorite{
+
+    background:#ef4444 !important;
+
+    color:white !important;
+
+}
+
+/* =============================================================================
+   FADE
+=============================================================================*/
+
+.fade-enter{
+
+    animation:modalFade .30s ease;
+
+}
+
+@keyframes modalFade{
+
+    from{
+
+        opacity:0;
+
+    }
+
+    to{
+
+        opacity:1;
+
+    }
+
+}
+
+/* =============================================================================
+   RESPONSIVO
+=============================================================================*/
+
+@media(max-width:1200px){
+
+.modal-sidebar{
+
+    display:none;
+
+}
+
+.modal-content{
+
+    width:98vw;
+
+}
+
+}
+
+@media(max-width:768px){
+
+.modal{
+
+    padding:0;
+
+}
+
+.modal-content{
+
+    width:100vw;
+
+    height:100vh;
+
+    border-radius:0;
+
+}
+
+.modal-header{
+
+    padding:14px 18px;
+
+}
+
+.modal-title{
+
+    font-size:1rem;
+
+}
+
+.modal-footer{
+
+    flex-direction:column;
+
+    gap:15px;
+
+}
+
+.modal-navigation{
+
+    width:100%;
+
+    justify-content:center;
+
+}
+
+.modal-share{
+
+    width:100%;
+
+    justify-content:center;
+
+}
+
+}
+
+@media(max-width:480px){
+
+.modal-toolbar{
+
+    display:none;
+
+}
+
+.modal-title{
+
+    font-size:.95rem;
+
+}
+
+.modal-navigation button{
+
+    flex:1;
+
+}
+
+}
+
+/* =============================================================================
+   LIGHT THEME
+=============================================================================*/
+
+body.light-theme .modal{
+
+    background:rgba(255,255,255,.75);
+
+}
+
+body.light-theme .modal-loading{
+
+    background:rgba(255,255,255,.90);
+
+}
+
+body.light-theme .modal-viewer{
+
+    background:white;
+
+}
+
+body.light-theme .modal-toolbar button,
+
+body.light-theme .modal-share button{
+
+    background:#eef2f7;
+
+}
+
+body.light-theme .modal-toolbar button:hover,
+
+body.light-theme .modal-share button:hover{
+
+    background:var(--color-primary);
+
+    color:white;
+
+}
